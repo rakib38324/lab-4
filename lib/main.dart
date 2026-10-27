@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lab_4/screen1.dart';
 
 void main() {
   runApp(const MyApp());
@@ -62,56 +63,30 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
 
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // DropdownButton Example
-            DropdownButton<String>(
-              hint: const Text('Select a City'),
-              value: selectedCity,
-              icon: const Icon(Icons.arrow_drop_down),
-              style: const TextStyle(color: Colors.deepPurple, fontSize: 16),
-              items: cities.map((String city) {
-                return DropdownMenuItem<String>(
-                  value: city,
-                  child: Text(city),
-                );
-              }).toList(),
-              onChanged: (String? newValue) {
-                setState(() {
-                  selectedCity = newValue!;
-                });
-              },
-            ),
-
-            const SizedBox(height: 40),
-
-            // OverflowBar Example
-            OverflowBar(
-              alignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Saved Successfully')),
-                    );
-                  },
-                  child: const Text('Save'),
+    child: Column(
+    crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ElevatedButton(
+            onPressed: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) {
+                      return Screen1();
+                    }
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Action Cancelled')),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.grey),
-                  child: const Text('Cancel'),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
+              );
+            },
+            child: Text("Click Here to Go Screen 1", style: TextStyle(
+                fontSize: 20
+            ),)
+        )
+      ],
+    )
+    ),
+
+
     );
   }
 }
