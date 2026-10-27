@@ -25,22 +25,32 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Dropdown Button Widget'),
-      ),
-      body: CityDropdown()
+        appBar: AppBar(
+          title: Text('Dropdown Button Widget'),
+        ),
+        body: Center(
+          child: CityDropdown(),
+        )
 
     );
   }
 }
 
+
+
+
+
+
 class CityDropdown extends StatefulWidget {
   const CityDropdown({super.key});
 
   @override
-  State<CityDropdown> createState() => _CityDropdownState();
+  State<CityDropdown> createState() => _CityDropdownStateM3();
 }
 
+
+
+// previous version
 class _CityDropdownState extends State<CityDropdown> {
   // Step 1: Define a list of cities
   final List<String> cities = ['Dhaka', 'Kuala Lumpur', 'Singapore', 'Bangkok'];
@@ -70,4 +80,37 @@ class _CityDropdownState extends State<CityDropdown> {
   }
 }
 
+
+
+// M3 version
+class _CityDropdownStateM3 extends State<CityDropdown> {
+  // Step 1: Define a list of cities
+  final List<String> cities = ['Kuching', 'Kuala Lumpur', 'Singapore', 'Bangkok'];
+
+  // Step 2: Define a variable to hold the selected value
+  String? selectedCity;
+
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownMenu<String>(
+      label: const Text('Select a City'),
+      width: 250,
+      enableFilter: true,      // type to filter the list
+      leadingIcon: const Icon(Icons.location_city),
+      onSelected: (String? city) {
+        setState(() {
+          selectedCity = city;
+        });
+      },
+      dropdownMenuEntries: cities
+          .map((city) => DropdownMenuEntry<String>(
+        value: city,
+        label: city,
+      ))
+          .toList(),
+    );
+  }
+
+}
 
